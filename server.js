@@ -1,15 +1,15 @@
 const express = require('express');
 const app = express();
-app.port('port', process.env.PORT || 8080)
+const port = process.env.PORT || 8080
 
 app.get('/', (req, res) => {
   res.send('OAuth Server Online...')
 })
 
-const fetch = require('node-fetch')
+const fetch = import('node-fetch')
 
-app.get('/oauth/github/user', (req, res) => {
-  const accessToken = 'OAUTH-TOKEN'; // Replace 'OAUTH-TOKEN' with the actual OAuth token
+app.get('/oauth/github/user/:token', (req, res) => {
+  const accessToken = req.params.token
 
   fetch('https://api.github.com/user', {
     headers: {
@@ -53,6 +53,6 @@ app.post('/oauth/callback', (req, res) => {
   });
 });
 
-app.listen(app.get('port'), () => {
-  console.log('Server is running on port', app.get('port'))
+app.listen('port', () => {
+  console.log(`Server is running on port: ${port}`)
 })
