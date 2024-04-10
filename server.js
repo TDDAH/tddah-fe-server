@@ -1,6 +1,6 @@
 const express = require('express');
 const app = express();
-app.sort('port', process.env.PORT || 8080)
+app.port('port', process.env.PORT || 8080)
 
 app.get('/', (req, res) => {
   res.send('OAuth Server Online...')
