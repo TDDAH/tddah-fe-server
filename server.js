@@ -38,13 +38,13 @@ import('node-fetch').then(({ default: fetch }) => {
   });
 
   app.post('/oauth/callback', (req, res) => {
-    const requestBody = req.body;
+    const requestBody = JSON.stringify(req.body);
     console.log("req.body", requestBody);
     
     fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
       headers: {
-        'Content-Type': 'application/x-www-form-urlencoded',
+        'Content-Type': 'application/json',
         'Accept': 'application/json'
       },
       body: requestBody 
