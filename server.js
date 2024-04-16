@@ -13,7 +13,7 @@ app.get('/', (req, res) => {
 
 
 import('node-fetch').then(({ default: fetch }) => {
-  app.get('/oauth/github/user/:token', (req, res) => {
+  app.get('/oauth/user/:token', (req, res) => {
     const accessToken = req.params.token;
 
     fetch('https://api.github.com/user', {
@@ -39,7 +39,7 @@ import('node-fetch').then(({ default: fetch }) => {
 
   app.post('/oauth/callback', (req, res) => {
     const requestBody = JSON.stringify(req.body);
-    console.log("req.body", requestBody);
+    // console.log("req.body", requestBody);
     
     fetch('https://github.com/login/oauth/access_token', {
       method: 'POST',
@@ -51,11 +51,11 @@ import('node-fetch').then(({ default: fetch }) => {
     })
     .then(response => response.json())
     .then(data => {
-      console.log("data:", data);
+      // console.log("data:", data);
       res.send(data);
     })
     .catch(error => {
-      console.error('Error:', error);
+      // console.error('Error:', error);
       res.status(500).send('Internal Server Error');
     });
   });
